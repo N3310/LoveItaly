@@ -1,0 +1,19 @@
+Appunti APP
+	
+	- Login indipendente dalla visita dei prodotti, obbligatorio solo all'acquisto, tuttavia è possibile riempire il carrello
+		
+	- se riusciamo ad implementare la chat verrà fatta , altrimenti useremo form contatti
+	
+	- sezione FAQ
+		
+	- target: utente già frequentate del sito
+		
+	- il "come funziona" dell'applicazione sarà riportato nell'evenutale documentazione dell'app e non al suo interno
+	
+	- banner che riporta localizzazione (tipo messaggio in IOS)
+		
+	- nella home categoria prodotti in vetrina e categoria nuovi prodotti, che prendono e mostrano a video un img randome e al click ti mostra tutti i prodotti con i relativi prezzi
+		
+	
+		
+	
