@@ -1,4 +1,4 @@
-# LoveItaly
+# N3310 - LoveItaly App
 ## Team Member
 - Vincenzo Stoico
 - Patrizio Pezzilli
@@ -16,14 +16,14 @@ LoveItaly/<br>
 ## Tecnologie Utilizzate
 - HTML5
 - CSS3
-- JAVASCRIPT
-- FRAMEWORK APACHE CORDOVA
+- Javascript
+- Fremework Apache Cordova
 
 ## Tool Utilizzati
-- Draw.io
-- Pages
-- JBoss
-- Atom
-- Android Studio
-- Espresso
-- Materialize
+- Draw.io : mockups / wireframes / others
+- Pages : documentation
+- JBoss : develop
+- Atom : develop
+- Android Studio : debug / test
+- Espresso : css
+- Materialize : utility
