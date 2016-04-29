@@ -1,10 +1,11 @@
-# N3310 - LoveItaly App
+#  :strawberry: :grapes: LoveItaly App :green_apple: :eggplant:
 ## Team Member
+##### N3310 GROUP
 - Vincenzo Stoico
 - Patrizio Pezzilli
 - Luca Ferrari
 
-##Repository Structure
+## Repository Structure
 LoveItaly/<br>
   |--Application/<br>
   |  |--<br>
