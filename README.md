@@ -11,7 +11,7 @@ LoveItaly/<br>
   |  |--<br>
   |<br>
   |--Documentation/<br>
-  |  |--LoveItaly_DOC.pdf     //Design Document<br>
+  |  |--LoveItaly_DesignDOC.pdf     //Design Document<br>
 
 
 ## Tecnologie Utilizzate
