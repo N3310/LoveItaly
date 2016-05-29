@@ -1,0 +1,12 @@
+{
+    success: function(model, response, options) {
+        console.log(model);
+        console.log(response);
+        model.toJSON();
+    },
+    error: function(model, response, options) {
+        console.log(response.statusText);
+    },
+    // A timeout is the only way to get an error event for JSONP calls!
+    timeout: 5000
+}

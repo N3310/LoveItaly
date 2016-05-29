@@ -1,0 +1,263 @@
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+ */
+* {
+    -webkit-tap-highlight-color: rgba(0,0,0,0); /* make transparent link selection, adjust last value opacity 0 to 1.0 */
+}
+
+body {
+    -webkit-touch-callout: none;                /* prevent callout to copy image, etc when tap to hold */
+    -webkit-text-size-adjust: none;             /* prevent webkit from resizing text to fit */
+    -webkit-user-select: none;                  /* prevent copy paste, to allow, change 'none' to 'text' */
+    background-color:#E4E4E4;
+/*    background-image:linear-gradient(top, #A7A7A7 0%, #E4E4E4 51%);
+    background-image:-webkit-linear-gradient(top, #A7A7A7 0%, #E4E4E4 51%);
+    background-image:-ms-linear-gradient(top, #A7A7A7 0%, #E4E4E4 51%);
+    background-image:-webkit-gradient(
+        linear,
+        left top,
+        left bottom,
+        color-stop(0, #A7A7A7),
+        color-stop(0.51, #E4E4E4)
+    ); */
+    background-color: #fff;
+    background-attachment:fixed;
+    font-family: "Roboto",Georgia,Times,Times New Roman,serif;
+    font-size:12px;
+    height:100%;
+    margin:0px;
+    padding:0px;
+    width:100%;
+}
+
+/* Portrait layout (default) */
+.app {
+    background:url(../img/logo.png) no-repeat center top; /* 170px x 200px */
+    position:absolute;             /* position in the center of the screen */
+    left:50%;
+    top:50%;
+    height:50px;                   /* text area height */
+    width:225px;                   /* text area width */
+    text-align:center;
+    padding:180px 0px 0px 0px;     /* image height is 200px (bottom 20px are overlapped with text) */
+    margin:-115px 0px 0px -112px;  /* offset vertical: half of image height and text area height */
+                                   /* offset horizontal: half of text area width */
+}
+
+/* Landscape layout (with min-width) */
+@media screen and (min-aspect-ratio: 1/1) and (min-width:400px) {
+    .app {
+        background-position:left center;
+        padding:75px 0px 75px 170px;  /* padding-top + padding-bottom + text area = image height */
+        margin:-90px 0px 0px -198px;  /* offset vertical: half of image height */
+                                      /* offset horizontal: half of image width and text area width */
+    }
+}
+
+h1 {
+    font-size:24px;
+    font-weight:normal;
+    margin:0px;
+    overflow:visible;
+    padding:0px;
+    text-align:center;
+}
+
+.event {
+    border-radius:4px;
+    -webkit-border-radius:4px;
+    color:#FFFFFF;
+    font-size:12px;
+    margin:0px 30px;
+    padding:2px 0px;
+}
+
+.event.listening {
+    background-color:#333333;
+    display:block;
+}
+
+.event.received {
+    background-color:#4B946A;
+    display:none;
+}
+
+@keyframes fade {
+    from { opacity: 1.0; }
+    50% { opacity: 0.4; }
+    to { opacity: 1.0; }
+}
+
+@-webkit-keyframes fade {
+    from { opacity: 1.0; }
+    50% { opacity: 0.4; }
+    to { opacity: 1.0; }
+}
+
+.blink {
+    animation:fade 3000ms infinite;
+    -webkit-animation:fade 3000ms infinite;
+}
+
+/* Font di Loveitaly */
+ @font-face {
+  font-family: "Rokkitt";
+  font-style: normal;
+  font-weight: 400;
+  src: local("Rokkitt"), local("Rokkitt-Regular"), url("http://fonts.gstatic.com/s/rokkitt/v10/Uu8b3yBtxQPmPTMr0WQ_CA.woff2") format("woff2");
+  unicode-range: U+0-FF, U+131, U+152-153, U+2C6, U+2DA, U+2DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+}
+/* --- */
+
+/* CSS della NavBar */
+#greenNav {
+    background-color: #127f3f;
+    color: #fff;
+}
+
+
+#slide-out #loveitaly-logo {
+    width: 100%;
+    height: auto;
+    border-bottom: dashed #477a3d;
+}
+
+
+#search-input {
+    display: none;
+    overflow: hidden;
+    height: 90%;
+    position: relative;
+    top: 2.5px;
+
+}
+
+#search-input .input-field{
+    height: 100%;
+    margin-right: 5px;
+}
+
+#back-button {
+    position: absolute;
+    right: initial;
+    left: 10px;
+}
+
+/* --- */
+
+/* Stili Home Page */
+#home-page #titolo-pagina {
+    display: inline-block;
+    margin-left: 40px;
+    margin-top: 14px;
+    text-align: center;
+}
+
+#home-page h5 {
+    text-align: center;
+}
+/* Fine Home Page */
+
+.btn, .btn-large {
+  background-color: #127f3f !important;
+}
+/* Stile Slider */
+
+/* SETTO A VERDE ICONE MEDIE E BTN */
+i.medium {
+color: #127f3f !important;
+
+}
+.single-item .card .card-content p {
+  text-align: center;
+  color: #fff ;
+  /* text-shadow: 1px 1px 2px #000; Mi crea problemi su Chrome */
+  font-size: 4vw;  /* Dimensioni in base alla larghezza vw */
+}
+
+.single-item .card {
+  padding: 0px !important;
+  background-color: #127f3f;
+
+}
+
+.single-item .card .card-action #bottone-ca {
+  font-size: 10.5vw;
+  line-height: normal;
+  height: 12vw;
+  width: 22vw;
+  padding: 0px 20px;
+}
+
+.single-item .card .card-action #bottone-ca i {
+  padding-top:3px;
+  font-size: 1em;
+}
+
+/* Fine Stile Slider */
+
+/* Stile Pagina Contatti */
+
+#contatti h5{
+    margin-top: 0px;
+    text-align: center;
+    padding-top: 17px;
+    padding-left: 63px;
+}
+
+#contatti h6{
+    text-align: center;
+    font-size: 17px;
+    color: #127f3f;
+}
+
+#contatti span , #contatti .collection i{
+    color: #127f3f;
+}
+
+#contatti input[type=text] {
+    margin-top: 20px;
+    border-bottom: 1px solid #127f3f;
+    background-color: #FFF;
+    border-radius: 2px;
+}
+
+#contatti textarea{
+    background-color: #FFF;
+    border-radius: 2px;
+    border-bottom: 1px solid #127f3f;
+
+}
+
+#contatti .btn {
+    background-color: #127f3f;
+}
+
+/* Codice per colorare placeholder dell'input
+#contatti input::-webkit-input-placeholder, textarea::-webkit-input-placeholder {
+  color: #66bb6a;
+} */
+
+/*
+#contatti a {
+    width: 68%;
+    top: 10px;
+    left: 10px;
+}*/
+
+/* Fine Contatti */

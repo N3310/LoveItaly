@@ -1,0 +1,14 @@
+
+<ul class="collection">
+  {{#each this}}
+    <li class="collection-item avatar" data-cat="{{this.id}}" id="listaprod">
+      <img src="{{this.img}}" alt="" class="circle">
+      <span class="title"><strong>{{this.nome}}</strong></span>
+      <p>{{ this.meta_title }}<br>
+
+      </p>
+
+    </li>
+      {{/each}}
+
+  </ul>
