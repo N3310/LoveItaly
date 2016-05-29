@@ -49,6 +49,8 @@ define(function(require) {
             model.fetch({
                 success: function() {
                     console.log(model.toJSON());
+                    var temp= model.toJSON();
+                    console.log(temp.size);
 
                     $(that.el).html(that.template(model.toJSON()));
                     return that;

@@ -135,6 +135,8 @@ define(function(require) {
             });
             this.changePage(page);
 
+             $('select').material_select();
+
 
         },
 

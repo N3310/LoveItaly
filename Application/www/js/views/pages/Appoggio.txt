@@ -10,3 +10,31 @@
     // A timeout is the only way to get an error event for JSONP calls!
     timeout: 5000
 }
+
+
+
+
+
+
+success: function() {
+    //num = num.toFixed(2)
+    var temptext = model.get('description');
+    var tempprice = model.get('price');
+
+    var idprod = model.get('id');
+    var idtemp = model.toJSON();
+    idimg = (idtemp.associations.images[0]).id;
+    idprod = idprod;
+
+    model.set("img", 'http://192.168.56.101/loveitaly/api/images/products/'+ idprod + '/' + idimg + '/?ws_key=IYI6M35MLB8UVW38Y99RY3YPQWRX5X8H');
+    console.log(model.toJSON());
+    //uso funzione  JQUERY per eliminare <tag> html introdotti da prestashop
+    model.set("description", $(temptext).text());
+    model.set("price", parseFloat(tempprice).toFixed(2));
+
+
+    $(that.el).html(that.template(model.toJSON()));
+    return that;
+    //  $(this.el).html(this.template((this.collection).toJSON()));
+}
+});
