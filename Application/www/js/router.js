@@ -235,7 +235,12 @@ define(function(require) {
                 model: model
             });
             this.changePage(page);
-            $('#modal2').closeModal();
+
+            $('#modal2').closeModal({
+              complete: function(){
+                $('.lean-overlay').remove();
+              }
+            });
         },
 
         categoria: function() {

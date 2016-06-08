@@ -188,12 +188,17 @@ define(function(require) {
 
             $("#person-button").click(function(e) {
                 e.preventDefault();
-                $('#modal2').openModal();
+                $('#modal2').openModal({
+                  
+                });
             });
 
             $("#cart-button").click(function(e) {
                 e.preventDefault();
-                $('#modal1').openModal();
+                $('#modal1').openModal({
+                  opacity: 0,
+                  complete: function() { $('.lean-overlay').remove() } // Callback for Modal close
+                });
             });
 
             $("#svuota").click(function(e) {

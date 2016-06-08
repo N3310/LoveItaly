@@ -310,7 +310,12 @@ define(function(require) {
 
             localStorage.removeItem("sessione");
             $('#person-button').remove();
-            $('#modal2').closeModal();
+            $('#modal2').closeModal({
+              complete: function(){
+                    $('.lean-overlay').remove();
+
+              }
+            });
             //     effettuare LOGOUT --- CODE
             Backbone.history.navigate("myview", {
                 trigger: true
