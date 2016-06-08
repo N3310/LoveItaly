@@ -1,4 +1,5 @@
-#  :strawberry: :grapes: LoveItaly App :green_apple: :eggplant:
+![alt tag](http://s33.postimg.org/7rdvg1bqn/Schermata_2016_06_08_alle_20_35_14.png)
+
 ## Team Member
 ##### N3310 GROUP
 - Vincenzo Stoico
