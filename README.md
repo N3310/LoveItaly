@@ -9,10 +9,11 @@
 ## Repository Structure
 LoveItaly/<br>
   |--Application/<br>
-  |  |--<br>
+  |  |--<br>www/  -- Qui si trova tutta l'applicazione composta di Model, View e Collections
   |<br>
   |--Documentation/<br>
   |  |--LoveItaly_DesignDOC.pdf     //Design Document<br>
+  |   |--LoveItaly_TechDOC.pdf     //Technical Document<br>
 
 
 ## Tecnologie Utilizzate
