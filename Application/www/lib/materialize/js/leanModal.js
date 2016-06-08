@@ -1,14 +1,21 @@
 (function($) {
+    // Check if overlay exists
+    var overlay_exists = false;
+    if ($('.lean-overlay').length > 0) {
+      overlay_exists = true;
+    }
+
     var _stack = 0,
     _lastID = 0,
     _generateID = function() {
-      _lastID++;
+      if (!overlay_exists) {
+        _lastID++;
+      }
       return 'materialize-lean-overlay-' + _lastID;
     };
 
   $.fn.extend({
     openModal: function(options) {
-
       $('body').css('overflow', 'hidden');
 
       var defaults = {
@@ -18,21 +25,27 @@
         ready: undefined,
         complete: undefined,
         dismissible: true,
-        starting_top: '4%'
+        starting_top: '4%',
       },
-      overlayID = _generateID(),
+      overlayID = _generateID(overlay_exists),
       $modal = $(this),
       $overlay = $('<div class="lean-overlay"></div>'),
       lStack = (++_stack);
 
       // Store a reference of the overlay
-      $overlay.attr('id', overlayID).css('z-index', 1000 + lStack * 2);
-      $modal.data('overlay-id', overlayID).css('z-index', 1000 + lStack * 2 + 1);
-
-      $("body").append($overlay);
+      if (!overlay_exists) {
+          $overlay.attr('id', overlayID).css('z-index', 1000 + lStack * 2);
+          $modal.data('overlay-id', overlayID).css('z-index', 1000 + lStack * 2 + 1);
+    }
 
       // Override defaults
       options = $.extend(defaults, options);
+
+      if (overlay_exists) {
+          $overlay.show();
+      } else {
+          $("body").append($overlay);
+      }
 
       if (options.dismissible) {
         $overlay.click(function() {
@@ -69,7 +82,9 @@
           // Handle modal ready callback
           complete: function() {
             if (typeof(options.ready) === "function") {
-              options.ready();
+              if (!overlay_exists) {
+                  options.ready();
+              }
             }
           }
         });
@@ -84,7 +99,9 @@
           // Handle modal ready callback
           complete: function() {
             if (typeof(options.ready) === "function") {
-              options.ready();
+              if (!overlay_exists) {
+                  options.ready();
+              }
             }
           }
         });
@@ -127,7 +144,9 @@
 
             // Call complete callback
             if (typeof(options.complete) === "function") {
-              options.complete();
+                if (!overlay_exists) {
+                  options.complete();
+                }
             }
             $overlay.remove();
             _stack--;
@@ -144,7 +163,9 @@
               $(this).css('display', 'none');
               // Call complete callback
               if (typeof(options.complete) === "function") {
-                options.complete();
+                if (!overlay_exists) {
+                  options.complete();
+                }
               }
               $overlay.remove();
               _stack--;

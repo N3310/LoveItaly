@@ -1,44 +1,82 @@
   <div class="container">
-                <div class="row center">
-                  <img src="img/personale.png" style="height:24em; width:24em; margin-bottom:2em;">
-                    <div class="col s4">
-                        <h6>Nome<br>
-                            Cognome<br>
-                            Data di nascita<br></h6>
-                    </div>
-                    <div class="col s4">
-                        <h6>Luca<br>
-                            Ferrari<br>
-                            13/01/1994<br></h6>
-                    </div>
-                </div>
-                <div class="divider">
-                </div>
-                <h5>Storico Ordini</h5>
-                <ul class="collection">
-                    <li class="collection-item ">
-                      <span class="title">Title</span>
-                      <p>First Line <br>
-                         Second Line
-                      </p>
-                    </li>
-                    <li class="collection-item ">
-                      <span class="title">Title</span>
-                      <p>First Line <br>
-                         Second Line
-                      </p>
-                    </li>
-                    <li class="collection-item ">
-                      <span class="title">Title</span>
-                      <p>First Line <br>
-                         Second Line
-                      </p>
-                    </li>
-                    <li class="collection-item ">
-                      <span class="title">Title</span>
-                      <p>First Line <br>
-                         Second Line
-                      </p>
-                    </li>
-                  </ul>
+    <div class="row">
+      <img src="img/personale.png" id="img-areap">
+
+      <div id="header-card" class="col s12 card">
+
+        <!-- Blocco Nome -->
+        <div class="col s12">
+          <div class="col s6">
+
+            <div class="col s2">
+              <i class="material-icons">person</i>
             </div>
+            <div class="col s10">
+              <span>Nome</span>
+            </div>
+
+          </div>
+          <div class="col s6">
+            <span>{{attributes.0.firstname}}</span>
+          </div>
+        </div>
+        <!-- -->
+
+        <!-- Blocco Cognome -->
+        <div class="col s12">
+          <div class="col s6">
+
+            <div class="col s2">
+              <i class="material-icons">supervisor_account</i>
+            </div>
+            <div class="col s10">
+              <span>Cognome</span>
+            </div>
+
+          </div>
+
+          <div class="col s6">
+            <span>{{attributes.0.lastname}}</span>
+          </div>
+        </div>
+        <!-- -->
+
+
+        <!-- Blocco Email -->
+        <div class="col s12">
+          <div class="col s6">
+
+            <div class="col s2">
+              <i class="material-icons">mail</i>
+            </div>
+            <div class="col s10">
+              <span>Email</span>
+            </div>
+
+          </div>
+          <div class="col s6">
+            <span>{{id}}</span>
+          </div>
+          <!-- -->
+
+        </div>
+      </div>
+
+
+      <div id="arrow-header" class="col s12" >
+        <h5 id="tit-vetr">Storico Ordini</h5>
+        <img src="img/arrow.png">
+      </div>
+              <ul class="collection">
+        {{#each ordini}}
+          <li class="collection-item ">
+            <span class="title"><strong>{{reference}}</strong></span>
+            <p>{{total_paid}}€ <br>
+             {{date_upd}}
+            </p>
+          </li>
+ {{/each}}
+        </ul>
+
+    </div>
+</div>

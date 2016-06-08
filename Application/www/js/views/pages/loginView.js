@@ -1,66 +1,105 @@
 define(function(require) {
 
-  var Backbone = require("backbone");
-  var ListCategory = require("models/ListCategory");
-  var Utils = require("utils");
+    var Backbone = require("backbone");
+    var User = require("models/User");
+    var Utils = require("utils");
+    var session = require("session");
 
-  var loginView = Utils.Page.extend({
-
-    constructorName: "loginView",
-
-    model: ListCategory,
-
-    initialize: function() {
+    var loginView = Utils.Page.extend({
 
 
-      // load the precompiled template
-      this.template = Utils.templates.login;
-      // here we can register to inTheDOM or removing events
-      // this.listenTo(this, "inTheDOM", function() {
+        constructorName: "loginView",
 
-      //     console.log(data);
-      //   });
-      // });
-      // this.listenTo(this, "removing", functionName);
+        model: User,
 
-      // by convention, all the inner views of a view must be stored in this.subViews
-    },
+        initialize: function() {
 
-    id: "loginView",
-    className: "loginView",
 
-    events: {
-      "tap #home": "home",
-      "click #register": "register"
-    },
+            this.template = Utils.templates.login;
 
-    render: function() {
+        },
 
-      var stored = JSON.parse(localStorage.getItem("cat"));
-    //  $(this.el).html(this.template((this.collection).toJSON()));
-    $(this.el).html(this.template(stored));
-      return this;
-    },
+        id: "loginView",
+        className: "loginView",
 
-    register: function(event) {
+        events: {
+            "click #login": "login",
+            "click #register": "register"
+        },
 
-      Backbone.history.navigate("register", {
-        trigger: true
-      });
-    },
+        render: function() {
 
-    home: function(e) {
-      Backbone.history.navigate("myview", {
-        trigger: true
-      });
-    },
-    prodotto: function(e) {
-      Backbone.history.navigate("listaprodotti", {
-        trigger: true
-      });
-    }
-  });
+            var stored = JSON.parse(localStorage.getItem("cat"));
+            $(this.el).html(this.template(stored));
+            return this;
+        },
 
-  return loginView;
+        register: function(event) {
+
+            Backbone.history.navigate("register", {
+                trigger: true
+            });
+        },
+
+        login: function(e) {
+
+            el: $("#login-form");
+
+            var self = this;
+
+            /*****************************************************
+             * Repreisco gli oggetti dal DOM
+             *****************************************************/
+            var username = $(this.el).find("#email").val(),
+                psw = $(this.el).find("#password").val();
+
+            /*****************************************************
+             * Controllo ora tramite chiamata a server (fetch)
+             * l'eventuale esistenza, nel caso esista lo mando
+             * nella "myview", che corrisponde alla nostra schermata
+             * principale altrimenti rimane li ritentando
+             * l'autenticazione
+             *****************************************************/
+
+            var utente = new User({
+                email: username,
+                psw: psw
+            });
+
+            utente.fetch({
+
+                success: function() {
+
+                    $(".right").append('<li><a id="person-button" ><i class="material-icons">person</i></a></li>');
+
+                    /*****************************************************
+                     * Avendo un server locale, l'unico modo per ottenere
+                     * una sessione vera e propria è in locale, usufruiamo
+                     * quindi il localStorage, compatibile con tutti i
+                     * mobile in commercio (wp, android, ios)
+                     *****************************************************/
+
+                    localStorage.setItem("sessione", username);
+                    localStorage.setItem("idsess", (utente.attributes.customers)[0].id);
+                    localStorage.setItem("keyorder", (utente.attributes.customers)[0].secure_key);
+                    Backbone.history.navigate("myview", {
+                        trigger: true
+                    });
+
+                    $("#person-button").click(function(e) {
+                        e.preventDefault();
+                        $('#modal2').openModal();
+                    });
+
+                },
+                error: function() {}
+
+            })
+
+        }
+
+    });
+
+    return loginView;
 
 });

@@ -14,13 +14,17 @@ define({
     myview: "templates/myview.html",
     catView: "templates/categorie.html",
     listaprodotti: "templates/listaprodotti.html",
-    dettaglioprodotto: "templates/productdetail.html",
-    auth: "templates/auth.html",
+    prodotto: "templates/productdetail.html",
     contact: "templates/contact.html",
     reserved: "templates/reserved.html",
     aziende: "templates/aziende.html",
     faq: "templates/faq.html",
     login: "templates/login.html",
     register: "templates/register.html",
-    dettaglio_azienda: "templates/dettaglio_azienda.html"
+    dettaglio_azienda: "templates/dettaglio_azienda.html",
+    basket: "templates/basket.html",
+    checkout: "templates/checkout.html",
+    noconnessione: "templates/noconnessione.html",
+    success: "templates/success.html",
+    listalocalita: "templates/listalocalita.html"
 });

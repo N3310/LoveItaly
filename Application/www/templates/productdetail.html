@@ -1,44 +1,67 @@
 <div class="container">
-        		<div class="row">
-        			<div class="col s12 center"><h5>{{this.name}}</h5><br>
-        				<img class="responsive-img" src="{{img}}">
-        			</div>
-        			<div class="col s6">
-        				<h5>Prezzo</h5>
-        			</div>
-        			<div class="col s6">
-        				<h5 class="right">€{{this.price}}</h5>
-        			</div>
-        			<div class="col s6">
-        				<h5>Quantità</h5>
-        			</div>
-        			<div class="col s6">
-          				<!-- Dropdown Trigger -->
+  <div class="row">
+    <div id="arrow-header" >
+      <h5 id="tit-vetr" class="productTitle detailTitle">{{this.name}}</h5>
+      <img src="img/arrow.png">
+    </div>
 
-                        <select>
-                          <option value="" disabled selected>Seleziona</option>
-                          <option value="1">1</option>
-                          <option value="2">2</option>
-                          <option value="3">3</option>
-                          <option value="4">4</option>
-                          <option value="5">5</option>
-                          <option value="6">6</option>
-                        </select>
-                        <label>Seleziona Quantità</label>
+    <div class="col s12 center card">
+      {{#if img}}
+      <img class="responsive-img" src="{{img}}">
+      {{else}}
+      <img class="responsive-img" src="img/no.jpg">
+      {{/if}}
+    </div>
+    <div id="center-div" class="col s12 card">
+      <div class="col s6">
+        <h5>Prezzo</h5>
+      </div>
+      <div class="col s6">
+        <h5 class="right">€{{this.price}}</h5>
+      </div>
+      <div class="col s6">
+        <h5>Quantità</h5>
+      </div>
+      <div class="col s6">
 
-        			</div>
+      <!-- -->
+        <form action="/productdetail" id="product-form">
+          <input id="id_prodotto" type="hidden" name="id_prodotto" value="{{this.id}}">
+          <input id="name" type="hidden" name="name" value="{{this.name}}">
+          <input id="price" type="hidden" name="price" value="{{this.price}}">
+          <input id="img" type="hidden" name="img" value="{{img}}">
+          <input id="quantity" type="hidden" name="quantity" value="">
+      <!-- -->
+          
+          <!-- Input per la quantità -->
 
-        			<div class="col s12">
-        				<div class="divider">
-        				</div>
-  						<div class="section">
-    						<h5>Descrizione</h5>
-    						<p><h6>{{this.description}}</h6></p>
-  						</div>
-        			</div>
+          <div id="qt" class="">
+           <a id="l-btn" class="left"><i class="material-icons">keyboard_arrow_left</i></a>
+           <div id="num-div" class="col s3"><span id="span-number" >1</span></div>
+           <a id="r-btn" class="right"><i class="material-icons">keyboard_arrow_right</i></a>
+         </div>
 
-					<div class="col s12 center">
-        				<a class="waves-effect waves-light btn">Aggiungi al carrello</a>
-        			</div>
-        		</div>
-        	</div>
+
+       </form>
+
+     </div>
+   </div>
+
+   <div id="sec-header" class="col s12">
+    <div id="arrow-header" >
+      <h5 id="tit-vetr">Descrizione</h5>
+      <img src="img/arrow.png">
+    </div>
+  </div>
+
+  <div id="prod-descr" class="card col s12">
+    <p>{{this.description}}</p>
+  </div>
+
+
+  <div id="sec-header" class="col s12 center">
+   <a id="addtocart" class="waves-effect waves-light btn">Aggiungi al carrello</a>
+  </div>
+
+</div>
+</div>

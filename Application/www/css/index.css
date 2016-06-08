@@ -1,121 +1,89 @@
-/*
- * Licensed to the Apache Software Foundation (ASF) under one
- * or more contributor license agreements.  See the NOTICE file
- * distributed with this work for additional information
- * regarding copyright ownership.  The ASF licenses this file
- * to you under the Apache License, Version 2.0 (the
- * "License"); you may not use this file except in compliance
- * with the License.  You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing,
- * software distributed under the License is distributed on an
- * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
- * KIND, either express or implied.  See the License for the
- * specific language governing permissions and limitations
- * under the License.
- */
 * {
-    -webkit-tap-highlight-color: rgba(0,0,0,0); /* make transparent link selection, adjust last value opacity 0 to 1.0 */
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
 }
 
 body {
-    -webkit-touch-callout: none;                /* prevent callout to copy image, etc when tap to hold */
-    -webkit-text-size-adjust: none;             /* prevent webkit from resizing text to fit */
-    -webkit-user-select: none;                  /* prevent copy paste, to allow, change 'none' to 'text' */
-    background-color:#E4E4E4;
-/*    background-image:linear-gradient(top, #A7A7A7 0%, #E4E4E4 51%);
-    background-image:-webkit-linear-gradient(top, #A7A7A7 0%, #E4E4E4 51%);
-    background-image:-ms-linear-gradient(top, #A7A7A7 0%, #E4E4E4 51%);
-    background-image:-webkit-gradient(
-        linear,
-        left top,
-        left bottom,
-        color-stop(0, #A7A7A7),
-        color-stop(0.51, #E4E4E4)
-    ); */
-    background-color: #fff;
-    background-attachment:fixed;
-    font-family: "Roboto",Georgia,Times,Times New Roman,serif;
-    font-size:12px;
-    height:100%;
-    margin:0px;
-    padding:0px;
-    width:100%;
+  -webkit-touch-callout: none;
+  -webkit-text-size-adjust: none;
+  -webkit-user-select: none;
+
+  background-color: #f5f5f5;
+
+  font-family: "Roboto",Georgia,Times,Times New Roman,serif;
+  /*font-size:12px;*/
+  height:100%;
+  margin:0px;
+  padding:0px;
+  width:100%;
 }
 
-/* Portrait layout (default) */
 .app {
-    background:url(../img/logo.png) no-repeat center top; /* 170px x 200px */
-    position:absolute;             /* position in the center of the screen */
-    left:50%;
-    top:50%;
-    height:50px;                   /* text area height */
-    width:225px;                   /* text area width */
-    text-align:center;
-    padding:180px 0px 0px 0px;     /* image height is 200px (bottom 20px are overlapped with text) */
-    margin:-115px 0px 0px -112px;  /* offset vertical: half of image height and text area height */
-                                   /* offset horizontal: half of text area width */
+  background:url(../img/logo.png) no-repeat center top;
+  position:absolute;
+  left:50%;
+  top:50%;
+  height:50px;
+  width:225px;
+  text-align:center;
+  padding:180px 0px 0px 0px;
+  margin:-115px 0px 0px -112px;
 }
 
-/* Landscape layout (with min-width) */
 @media screen and (min-aspect-ratio: 1/1) and (min-width:400px) {
-    .app {
-        background-position:left center;
-        padding:75px 0px 75px 170px;  /* padding-top + padding-bottom + text area = image height */
-        margin:-90px 0px 0px -198px;  /* offset vertical: half of image height */
-                                      /* offset horizontal: half of image width and text area width */
-    }
+  .app {
+    background-position:left center;
+    padding:75px 0px 75px 170px;
+    margin:-90px 0px 0px -198px;
+  }
 }
 
 h1 {
-    font-size:24px;
-    font-weight:normal;
-    margin:0px;
-    overflow:visible;
-    padding:0px;
-    text-align:center;
+  font-size:24px;
+  font-weight:normal;
+  margin:0px;
+  overflow:visible;
+  padding:0px;
+  text-align:center;
 }
 
 .event {
-    border-radius:4px;
-    -webkit-border-radius:4px;
-    color:#FFFFFF;
-    font-size:12px;
-    margin:0px 30px;
-    padding:2px 0px;
+  border-radius:4px;
+  -webkit-border-radius:4px;
+  color:#FFFFFF;
+  font-size:12px;
+  margin:0px 30px;
+  padding:2px 0px;
 }
 
 .event.listening {
-    background-color:#333333;
-    display:block;
+  background-color:#333333;
+  display:block;
 }
 
 .event.received {
-    background-color:#4B946A;
-    display:none;
+  background-color:#4B946A;
+  display:none;
 }
 
 @keyframes fade {
-    from { opacity: 1.0; }
-    50% { opacity: 0.4; }
-    to { opacity: 1.0; }
+  from { opacity: 1.0; }
+  50% { opacity: 0.4; }
+  to { opacity: 1.0; }
 }
 
 @-webkit-keyframes fade {
-    from { opacity: 1.0; }
-    50% { opacity: 0.4; }
-    to { opacity: 1.0; }
+  from { opacity: 1.0; }
+  50% { opacity: 0.4; }
+  to { opacity: 1.0; }
 }
 
 .blink {
-    animation:fade 3000ms infinite;
-    -webkit-animation:fade 3000ms infinite;
+  animation:fade 3000ms infinite;
+  -webkit-animation:fade 3000ms infinite;
 }
 
 /* Font di Loveitaly */
- @font-face {
+@font-face {
   font-family: "Rokkitt";
   font-style: normal;
   font-weight: 400;
@@ -124,70 +92,144 @@ h1 {
 }
 /* --- */
 
-/* CSS della NavBar */
-#greenNav {
-    background-color: #127f3f;
-    color: #fff;
+/* Content Style */
+#content {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  overflow-x: hidden;
 }
 
-
-#slide-out #loveitaly-logo {
-    width: 100%;
-    height: auto;
-    border-bottom: dashed #477a3d;
+#arrow-header {
+  height: 65px;
+  color: #fff;
 }
 
-
-#search-input {
-    display: none;
-    overflow: hidden;
-    height: 90%;
-    position: relative;
-    top: 2.5px;
-
+#arrow-header img{
+  width: 100%;
+  height:100%;
 }
 
-#search-input .input-field{
-    height: 100%;
-    margin-right: 5px;
-}
-
-#back-button {
-    position: absolute;
-    right: initial;
-    left: 10px;
+#tit-vetr{
+  position: absolute;
+  left: 0;
+  right: 0;
+  text-align: center;
 }
 
 /* --- */
 
+/* CSS della NavBar */
+/*
+
+#red-cont {
+  position: absolute;
+  background-color: red;
+  border-radius: 25px;
+  margin-top: 4px;
+  color: #fff;
+  text-align: center;
+}*/
+
+/*
+#navbar-inverse {
+  height: 60px;
+}
+
+*/
+
+#greenNav {
+  background-color: #127f3f;
+  color: #fff;
+}
+
+#slide-out #loveitaly-logo {
+  width: 100%;
+  height: auto;
+  border-bottom: dashed #439733;
+}
+
+#search-input {
+  display: none;
+  overflow: hidden;
+  height: 90%;
+  position: relative;
+  top: 2.5px;
+}
+
+#search-input .input-field{
+  height: 100%;
+  margin-right: 5px;
+}
+
+#back-button {
+  position: absolute;
+  right: initial;
+  left: 10px;
+}
+/* --- */
+
 /* Stili Home Page */
+
+main {
+
+  margin-bottom: 0px !important;
+}
+
 #home-page #titolo-pagina {
-    display: inline-block;
-    margin-left: 40px;
-    margin-top: 14px;
-    text-align: center;
+  display: inline-block;
+  margin-left: 40px;
+  margin-top: 14px;
+  text-align: center;
 }
 
 #home-page h5 {
-    text-align: center;
+  text-align: center;
 }
-/* Fine Home Page */
 
-.btn, .btn-large {
-  background-color: #127f3f !important;
+#dettagliofromhomepage{
+  background-color: white;
 }
+
+#imgslide{
+  height: 24em;
+  max-width: 100%;
+  margin: 0 auto;
+  width: auto;
+}
+
+#geolocalizzazione {
+  text-align: center;
+  color: grey;
+}
+
+
+/* --- */
+
+
+
 /* Stile Slider */
 
-/* SETTO A VERDE ICONE MEDIE E BTN */
-i.medium {
-color: #127f3f !important;
+.btn, .btn-large {
+  background-color: #429733 !important;
+}
 
+/* icone medie e btn verdi*/
+i.medium {
+  color: #429733 !important;
+  font-size: 48px !important;
+}
+
+.single-item #card-border {
+  border: 6px solid #429733;
 }
 .single-item .card .card-content p {
   text-align: center;
   color: #fff ;
-  /* text-shadow: 1px 1px 2px #000; Mi crea problemi su Chrome */
-  font-size: 4vw;  /* Dimensioni in base alla larghezza vw */
+  font-size: 4vw;
 }
 
 .single-item .card {
@@ -209,55 +251,356 @@ color: #127f3f !important;
   font-size: 1em;
 }
 
-/* Fine Stile Slider */
+/* Limita la lunghezza del titolo */
+.productTitle {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.detailTitle{
+    width: 95%;
+    padding-left: 15px;
+}
+/* --- */
 
 /* Stile Pagina Contatti */
-
 #contatti h5{
-    margin-top: 0px;
-    text-align: center;
-    padding-top: 17px;
-    padding-left: 63px;
+  margin-top: 0px;
+  text-align: center;
+  padding-top: 17px;
+  padding-left: 63px;
 }
 
 #contatti h6{
-    text-align: center;
-    font-size: 17px;
-    color: #127f3f;
+  text-align: center;
+  font-size: 17px;
+  color: #127f3f;
 }
 
 #contatti span , #contatti .collection i{
-    color: #127f3f;
+  color: #127f3f;
 }
 
 #contatti input[type=text] {
-    margin-top: 20px;
-    border-bottom: 1px solid #127f3f;
-    background-color: #FFF;
-    border-radius: 2px;
+  margin-top: 20px;
+  border-bottom: 1px solid #127f3f;
+  background-color: #FFF;
+  border-radius: 2px;
+}
+
+#domanda {
+  margin-top: 15px;
 }
 
 #contatti textarea{
-    background-color: #FFF;
-    border-radius: 2px;
-    border-bottom: 1px solid #127f3f;
-
+  background-color: #FFF;
+  border-radius: 2px;
+  border-bottom: 1px solid #127f3f;
+  margin-bottom: 30px
 }
 
 #contatti .btn {
-    background-color: #127f3f;
+  background-color: #127f3f;
 }
 
-/* Codice per colorare placeholder dell'input
-#contatti input::-webkit-input-placeholder, textarea::-webkit-input-placeholder {
-  color: #66bb6a;
-} */
+#btn-invio {
+  margin-bottom:2em;
+}
 
-/*
-#contatti a {
-    width: 68%;
-    top: 10px;
-    left: 10px;
-}*/
+#info ul li {
+  padding-top: 12px;
+}
+/* --- */
 
-/* Fine Contatti */
+/* Titolo checkout*/
+#titout{
+  text-align:center;
+}
+#ordina {
+  width: 100%;
+}
+
+#stile-nota {
+  padding-bottom: 10px;
+}
+/* --- */
+
+/* Bottone-input contatti*/
+#botinput{
+  margin-bottom:2em;
+  width: 100%;
+}
+/* --- */
+
+/* Img Faq */
+#img-faq{
+  height:24em;
+  width:24em;
+  margin-bottom:2em;
+}
+/* --- */
+
+/* Stile pagina Login */
+#img-log{
+  height:24em;
+  width:14em;
+}
+
+#login-form a {
+  width: 100%;
+}
+
+#mailpassw-div {
+  padding-right: 0px;
+  padding-left: 0px;
+}
+#mailpassw-div .input-field i {
+  font-size: 40px;
+}
+
+#password {
+  margin-bottom: 28px;
+}
+
+#accedi{
+  margin-top:2em;
+}
+
+
+#register{
+  margin-top:2em;
+}
+/* --- */
+
+/* Stile Modal Carrello */
+
+#modal1 {
+  color: #127f3f;
+  max-height: none !important;
+  height: 100%;
+}
+
+#modal1  .modal-footer{
+  position: relative;
+}
+
+#close-icn {
+  position: absolute;
+  color: #fff;
+}
+
+#modal-header a {
+  float: right;
+  padding-right: 15px;
+}
+
+
+/* Stile della lista dei prodotto */
+
+#single-prod {
+  width: 100%;
+}
+
+#li-header a {
+  color: #127f3f;
+  padding-right: 21px;
+}
+
+#liclose-icn i {
+  font-size:19px;
+  float: right;
+  height: auto;
+  line-height: normal;
+}
+
+#li-grid {
+  margin-bottom: 0px;
+}
+
+.modal-footer {
+  position: fixed;
+  bottom: 0;
+
+}
+
+#cartleft-btn {
+  float: left;
+  margin-left: 22px;
+}
+
+#modal2 {
+  color: #000;
+  text-align: center;
+  font-size: 25px;
+  overflow-x: hidden;
+}
+
+#modal2-content {
+  margin-bottom: 12px;
+  padding-bottom: 0px;
+}
+
+#area-per{
+  border-bottom: 3px dashed #127f3f;
+}
+
+#modal2-content a{
+  color: #000;
+}
+
+.modal-footer a {
+  margin-right: 40px !important;
+}
+/* -- -- */
+
+
+/* Stile pagina registrazione */
+#img-reg{
+  max-width: 100%;
+}
+
+#registrati{
+  margin-top:2em;
+  width: 100%;
+}
+
+#register-div .input-field i {
+  font-size: 40px;
+}
+/* --- */
+
+/* Stile area personale */
+#img-areap{
+  width:24em;
+}
+
+#header-card{
+  padding-left: 0px;
+  padding-bottom: 11px;
+  padding-top: 11px;
+}
+
+#header-card .col.s12{
+  padding-left: 0px;
+}
+
+#tit-res{
+  position: absolute;
+  bottom: -24px;
+  right: 0px;
+  left: 0px;
+  text-align: center;
+}
+
+/* --- */
+
+/* Stile success */
+#btn-tornahome{
+  margin-top:4em;
+  color:white!important;
+}
+/* --- */
+
+
+/*Stile dettaglio prodotto */
+
+#span-number {
+  padding-right: 4px;
+  padding-left: 4px;
+  margin-left: 3px;
+  font-size: 26px;
+}
+
+#num-div{
+  margin-top: 6px;
+}
+
+#qt {
+  float: right;
+}
+
+#qt i {
+  color: #fff;
+  font-size: 50px;
+}
+
+#center-div{
+  background-color: #127f3f;
+  border: 5px solid #429f3f;
+  color: #fff;
+}
+
+#prod-descr {
+  font-size: 14px;
+}
+
+#addtocart{
+  width: 100%;
+}
+
+#sec-header{
+  padding-right: 0px;
+  padding-left: 0px;
+}
+/* -- -- */
+
+/* Linea tratteggiata */
+#divtrat{
+  border-bottom: 3px dashed;
+  color: #127f3f;
+}
+/* --- */
+
+
+/* Stile dettaglio azienda */
+
+#listbymanu {
+  background-color: #127f3f;
+  color: #fff;
+}
+
+#listbymanu i {
+  color: #fff;
+}
+
+#div-descr {
+  font-size: 20px;
+}
+
+
+
+/* -- -- */
+
+#noconn{
+  text-align: center;
+  margin-top: 25%;
+
+}
+
+#noconn p{
+  font-size: 25px;
+}
+
+/* --Pagina Success -- */
+
+#btn-tornahome{
+  width: 100%;
+}
+#success {
+  width: 100%;
+}
+
+/* Stile lista localita */
+
+
+#localizza {
+    margin-top: 0.4em;
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
+    width: 100%;
+    margin-bottom: 0.4em;
+}
+
+#listaloc{
+  box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
+}

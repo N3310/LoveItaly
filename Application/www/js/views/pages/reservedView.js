@@ -1,56 +1,79 @@
 define(function(require) {
 
-  var Backbone = require("backbone");
-  var ListCategory = require("models/ListCategory");
-  var Utils = require("utils");
+    var Backbone = require("backbone");
+    var Customer = require("models/Customer");
+    var Utils = require("utils");
 
-  var reservedView = Utils.Page.extend({
+    var reservedView = Utils.Page.extend({
 
-    constructorName: "reservedView",
+        constructorName: "reservedView",
 
 
-    model: ListCategory,
+        model: Customer,
 
-    initialize: function() {
-      // load the precompiled template
-      this.template = Utils.templates.reserved;
-      // here we can register to inTheDOM or removing events
-      // this.listenTo(this, "inTheDOM", function() {
-      //   $('#content').on("swipe", function(data){
-      //     console.log(data);
-      //   });
-      // });
-      // this.listenTo(this, "removing", functionName);
+        initialize: function() {
+            this.template = Utils.templates.reserved;
+        },
 
-      // by convention, all the inner views of a view must be stored in this.subViews
-    },
+        id: "reservedView",
+        className: "reservedView",
 
-    id: "prodotto",
-    className: "reservedView",
+        events: {
+            "tap #home": "home",
+            "tap #dettaglio": "detail"
+        },
 
-    events: {
-      "tap #home": "home",
-      "tap #dettaglio": "detail"
-    },
+        render: function() {
 
-    render: function() {
-      $(this.el).html(this.template(this.model.toJSON()));
-      return this;
-    },
+            var email_utente = localStorage.getItem("sessione");
+            var utente = new Customer({
+                id: email_utente
+            });
+            console.log(utente);
+            var that = this;
+            utente.fetch({
+                success: function() {
 
-    home: function(e) {
-      Backbone.history.navigate("MyView", {
-        trigger: true
-      });
-    },
-    detail: function(event) {
 
-      Backbone.history.navigate("dettaglioprodotto", {
-        trigger: true
-      });
-    }
-  });
+                    var autenticazione = function(xhr) {
+                        var key64 = 'SVlJNk0zNU1MQjhVVlczOFk5OVJZM1lQUVdSWDVYOEg6'; //codifica 64 della API key
+                        var token = 'Basic '.concat(key64);
+                        xhr.setRequestHeader('Authorization', token);
+                    }
 
-  return reservedView;
+                    var chiamataAjax = function() {
+                        $.ajax({
+                            url: 'http://192.168.56.101/loveitaly/api/orders/?io_format=JSON&display=full&filter[id_customer]='+ localStorage.getItem("idsess"),
+                            async: true,
+                            type: "GET",
+                            dataType: 'json',
+                            beforeSend: autenticazione,
+
+                            success: function(result) {
+                                utente.ordini= result.orders;
+                                console.log(utente.toJSON());
+                                $(that.el).html(that.template(utente));
+                                return that;
+                              },
+                            error: function(XMLHttpRequest, textStatus, errorThrown) {
+                                console.log('Errore chiamata ajax!' +
+                                    '\nReponseText: ' + XMLHttpRequest.responseText +
+                                    '\nStatus: ' + textStatus +
+                                    '\nError: ' + errorThrown);
+                            }
+                        })
+                    }
+                    chiamataAjax();
+
+                },
+                error: function() {}
+            })
+
+        }
+
+
+    });
+
+    return reservedView;
 
 });

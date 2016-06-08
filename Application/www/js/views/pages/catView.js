@@ -1,92 +1,88 @@
 define(function(require) {
 
-  var Backbone = require("backbone");
-  var ListCategory = require("models/ListCategory");
-  var Utils = require("utils");
+    var Backbone = require("backbone");
+    var ListCategory = require("models/ListCategory");
+    var Utils = require("utils");
 
-  var catView = Utils.Page.extend({
+    var catView = Utils.Page.extend({
 
-    constructorName: "catView",
+        constructorName: "catView",
 
-    model: ListCategory,
+        model: ListCategory,
 
-    initialize: function() {
-      // load the precompiled template
-      this.template = Utils.templates.catView;
-      // here we can register to inTheDOM or removing events
-      // this.listenTo(this, "inTheDOM", function() {
-      //   $('#content').on("swipe", function(data){
-      //     console.log(data);
-      //   });
-      // });
-      // this.listenTo(this, "removing", functionName);
+        initialize: function() {
 
-      // by convention, all the inner views of a view must be stored in this.subViews
-    },
+            this.template = Utils.templates.catView;
 
-    id: "catView",
-    className: "catView",
+        },
 
-    events: {
-      "tap #home": "home",
-      "tap #prodotto": "prodotto",
-      "click #listaprod": "listaprod"
-    },
+        id: "catView",
+        className: "catView",
 
-    render: function() {
+        events: {
+            "click #listaprod": "listaprod"
+        },
 
-      var contenitore= new Array();
-      var stored = JSON.parse(localStorage.getItem("cat"));    //array ottenuto dal localstorage --> accesso piu veloce rispetto a chiamata AJAX
+        render: function() {
+
+            var contenitore = new Array();
+
+            /*****************************************************
+             * Uso array del localStorage per avere un accesso
+             * piu veloce rispetto ad una chiamata AJAX
+             *****************************************************/
+
+            var stored = JSON.parse(localStorage.getItem("cat"));
 
 
-      var immagini = new Array("","","img/img_cat/verdura.jpg","img/img_cat/frutta.jpg","img/img_cat/olio.jpg","img/img_cat/vino.png","img/img_cat/forno.jpg","img/img_cat/miele.jpg","img/img_cat/vino-rosso.jpg","img/img_cat/vino-rosato.jpeg","img/img_cat/vino-bianco.jpg","img/img_cat/pane.png","img/img_cat/dolci.jpg","img/img_cat/pizza.jpg","img/img_cat/sottolio.jpg","img/img_cat/confetture.jpg","img/img_cat/formaggio.jpg","","");
+            var immagini = new Array("", "", "img/img_cat/verdura.jpg", "img/img_cat/frutta.jpg", "img/img_cat/olio.jpg", "img/img_cat/vino.png", "img/img_cat/forno.jpg", "img/img_cat/miele.jpg", "img/img_cat/vino-rosso.jpg", "img/img_cat/vino-rosato.jpeg", "img/img_cat/vino-bianco.jpg", "img/img_cat/pane.png", "img/img_cat/dolci.jpg", "img/img_cat/pizza.jpg", "img/img_cat/sottolio.jpg", "img/img_cat/confetture.jpg", "img/img_cat/formaggio.jpg", "", "");
 
-      for (var i = 0; i < 18; i++) {
-        var categoria= {
-            id: stored[i].id,
-            img: immagini[i],
-            nome: stored[i].name,
-            meta_title:stored[i].meta_title
-      }
-      contenitore.push(categoria);
-    }
+            for (var i = 0; i < 18; i++) {
+                var categoria = {
+                    id: stored[i].id,
+                    img: immagini[i],
+                    nome: stored[i].name,
+                    meta_title: stored[i].meta_title
+                }
+                contenitore.push(categoria);
+            }
 
-    //rimuovo trash ottenuto da Prestashop
-      contenitore.splice(0, 2);
-      contenitore.splice(15, 2);
-      console.log(contenitore);
+            /*****************************************************
+             * Rimuovo e pulisco ciò che ho ottenuto da Prestashop
+             *****************************************************/
+            contenitore.splice(0, 2);
+            contenitore.splice(15, 2);
 
-    //  $(this.el).html(this.template((this.collection).toJSON()));
-    $(this.el).html(this.template(contenitore));
-      return this;
-    },
+            $(this.el).html(this.template(contenitore));
+            return this;
+        },
 
-    home: function(e) {
-      Backbone.history.navigate("myview", {
-        trigger: true
-      });
-    },
+        home: function(e) {
+            Backbone.history.navigate("myview", {
+                trigger: true
+            });
+        },
 
-    listaprod: function(e) {
+        listaprod: function(e) {
 
-      e.preventDefault();
+            e.preventDefault();
 
-      var datocategoria = $(e.currentTarget).attr("data-cat");
+            var datocategoria = $(e.currentTarget).attr("data-cat");
 
-      localStorage.setItem("datocategoria", datocategoria);
+            localStorage.setItem("datocategoria", datocategoria);
 
-      Backbone.history.navigate("listaprod", {
-        trigger: true
-      });
-    },
+            Backbone.history.navigate("listaprod", {
+                trigger: true
+            });
+        },
 
-    prodotto: function(e) {
-      Backbone.history.navigate("listaprodotti", {
-        trigger: true
-      });
-    }
-  });
+        prodotto: function(e) {
+            Backbone.history.navigate("listaprodotti", {
+                trigger: true
+            });
+        }
+    });
 
-  return catView;
+    return catView;
 
 });

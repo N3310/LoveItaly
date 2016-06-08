@@ -1,75 +1,77 @@
 define(function(require) {
 
-  var Backbone = require("backbone");
-  var ListProductByManufacter = require("models/ListProductByManufacter");
-  var Utils = require("utils");
+    var Backbone = require("backbone");
+    var ListProductByManufacter = require("models/ListProductByManufacter");
+    var Utils = require("utils");
 
-  var ListProductByManufacterView = Utils.Page.extend({
+    var ListProductByManufacterView = Utils.Page.extend({
 
-    constructorName: "ListProductByManufacterView",
+        constructorName: "ListProductByManufacterView",
 
-    model: ListProductByManufacter,
+        model: ListProductByManufacter,
 
-    initialize: function(variabile) {
+        initialize: function(variabile) {
 
-      // load the precompiled template
-      this.template = Utils.templates.listaprodotti;
+            this.template = Utils.templates.listaprodotti;
+
+        },
+
+        id: "ListProductByManufacterView",
+        className: "ListProductByManufacterView",
+
+        events: {
+            "click #prodotto": "prodotto"
+        },
+
+        render: function() {
+
+            var temp = localStorage.getItem("datoazienda");
+            var model = new ListProductByManufacter({
+                id: temp
+            });
+
+            var that = this;
+            model.fetch({
+                success: function() {
+                    var temp2 = model.toJSON();
 
 
-      // here we can register to inTheDOM or removing events
-      // this.listenTo(this, "inTheDOM", function() {
-      //   $('#content').on("swipe", function(data){
-      //     console.log(data);
-      //   });
-      // });
-      // this.listenTo(this, "removing", functionName);
+                    /*****************************************************
+                     * Costruzione della lista con immagini relative
+                     *****************************************************/
 
-      // by convention, all the inner views of a view must be stored in this.subViews
-    },
+                  for (var i = 0; i < Object.keys(temp2).length - 1; i++) {
+                        var idprod = ((model.toJSON())[i]).id;
+                        var idtemp = model.toJSON()[i];
+                        idimg = (idtemp.associations.images[0]).id;
+                        idprod = idprod;
+                        var img2 = 'http://192.168.56.101/loveitaly/api/images/products/' + idprod + '/' + idimg + '/?ws_key=IYI6M35MLB8UVW38Y99RY3YPQWRX5X8H';
+                        ((model.toJSON())[i]).img = img2;
+                        ((model.toJSON())[i]).price = parseFloat(((model.toJSON())[i]).price).toFixed(2);
+                    }
+                    $(that.el).html(that.template(model.toJSON()));
+                    return that;
+                }
+            });
+        },
 
-    id: "ListProductByManufacterView",
-    className: "ListProductByManufacterView",
+        prodotto: function(e) {
 
-    events: {
-      "tap #home": "home",
-      "click #prodotto": "prodotto"
-    },
+            e.preventDefault();
 
-    render: function() {
+            var datoprod = $(e.currentTarget).attr("data-prod");
 
-      var temp = localStorage.getItem("datoazienda");
-      console.log(temp);
-      var model = new ListProductByManufacter({id:temp});
+            localStorage.setItem("datoprod", datoprod);
 
-      var that=this;
-      model.fetch({
-          success: function() {
-            console.log(model.toJSON());
+            Backbone.history.navigate("prodotto", {
+                trigger: true
+            });
+        }
 
-            $(that.el).html(that.template(model.toJSON()));
-            return that;
-              //  $(this.el).html(this.template((this.collection).toJSON()));
-          }
-      });
-},
 
-prodotto: function(e) {
 
-    e.preventDefault();
-
-    var datoprod = $(e.currentTarget).attr("data-prod");
-
-    localStorage.setItem("datoprod", datoprod);
-
-    Backbone.history.navigate("prodotto", {
-        trigger: true
     });
-  }
 
-
-
-  });
-
-  return ListProductByManufacterView;
+    return ListProductByManufacterView;
 
 });

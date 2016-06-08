@@ -1,14 +1,20 @@
+<div class="row">
+<div class="col s12">
 
 <ul class="collection">
-  {{#each this}}
+ 	{{#each this}}
     <li class="collection-item avatar" id="dettaglio_azienda" data-az="{{this.id}}">
       <img src="img/azienda.jpg" alt="" class="circle">
-      <span class="title"><strong>{{this.name}}</strong></span>
-      <p>{{ this.meta_title }}<br>
+      <span class="title">
+      	<strong>{{this.name}}</strong>
+      </span>
 
+      <p>{{ this.meta_title }}<br>
       </p>
 
     </li>
       {{/each}}
 
-  </ul>
+</ul>
+</div>
+</div>

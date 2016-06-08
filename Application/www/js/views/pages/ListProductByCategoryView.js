@@ -14,19 +14,10 @@ define(function(require) {
 
         initialize: function(variabile) {
 
-            // load the precompiled template
+
             this.template = Utils.templates.listaprodotti;
 
 
-            // here we can register to inTheDOM or removing events
-            // this.listenTo(this, "inTheDOM", function() {
-            //   $('#content').on("swipe", function(data){
-            //     console.log(data);
-            //   });
-            // });
-            // this.listenTo(this, "removing", functionName);
-
-            // by convention, all the inner views of a view must be stored in this.subViews
         },
 
         id: "ListProductByCategoryView",
@@ -40,7 +31,6 @@ define(function(require) {
         render: function() {
 
             var temp = localStorage.getItem("datocategoria");
-            console.log(temp);
             var model = new ListProductByCategory({
                 id: temp
             });
@@ -48,13 +38,29 @@ define(function(require) {
             var that = this;
             model.fetch({
                 success: function() {
-                    console.log(model.toJSON());
                     var temp= model.toJSON();
-                    console.log(temp.size);
 
-                    $(that.el).html(that.template(model.toJSON()));
+
+                    /*****************************************************
+                     * Riempio gli oggetti dell'array con le immagini
+                     * in modo da usufruirne nella lista, mostrandole
+                     * all'utente
+                     *****************************************************/
+
+                    for (var i = 0; i < (Object.keys(temp).length)-1; i++) {
+
+                        var idprod = ((model.toJSON())[i]).id;
+                        var idtemp= model.toJSON()[i];
+                        idimg = (idtemp.associations.images[0]).id;
+                        idprod = idprod;
+                        var img2 = 'http://192.168.56.101/loveitaly/api/images/products/' + idprod + '/' + idimg + '/?ws_key=IYI6M35MLB8UVW38Y99RY3YPQWRX5X8H';
+                        ((model.toJSON())[i]).img= img2;
+                        ((model.toJSON())[i]).price= parseFloat(((model.toJSON())[i]).price).toFixed(2);
+                    }
+
+
+                    $(that.el).html(that.template((model.toJSON())));
                     return that;
-                    //  $(this.el).html(this.template((this.collection).toJSON()));
                 }
             });
         },

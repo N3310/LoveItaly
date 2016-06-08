@@ -1,68 +1,216 @@
 define(function(require) {
 
+    var $ = require("jquery");
     var Backbone = require("backbone");
-    var ListCategory = require("models/ListCategory");
+    var Products_homepage = require("models/Products_homepage");
+    var Products = require("models/Products");
     var MyCollection = require("collections/Categories");
     var Utils = require("utils");
+    var productHomepage = require("models/productHomepage");
+    var saleProduct = require("models/saleProduct");
+    var sweetProduct = require("models/sweetProduct");
+
 
     var MyView = Utils.Page.extend({
-
         constructorName: "MyView",
-
-        id: "mapView",
-
-        model: ListCategory,
+        model: Products_homepage,
 
         initialize: function() {
-
-
             this.template = Utils.templates.myview;
-
-            // load the precompiled template
-
-            // here we can register to inTheDOM or removing events
-            // this.listenTo(this, "inTheDOM", function() {
-            //   $('#content').on("swipe", function(data){
-            //     console.log(data);
-            //   });
-            // });
-            // this.listenTo(this, "removing", functionName);
-
-            // by convention, all the inner views of a view must be stored in this.subViews
         },
 
         id: "myview",
         className: "i-g page",
 
         events: {
-            "tap #goToMap": "goToMap",
-            "tap li#catView": "catView",
-            "tap li#prodotto": "prodotto"
+            "click #imgslide": "prodotto",
+            "click #bottone-ca": "carrello"
         },
 
         render: function() {
 
-        console.log(this.model.toJSON());
-            //$(this.el).html(this.template(this.model));
-           $(this.el).html(this.template(this.model.toJSON()));
-            //  $(this.el).html(this.template(JSON.stringify(this.model)));
+            /*****************************************************
+             * Riempio la home con i miei oggetti di interesse
+             *****************************************************/
 
-            return this;
+            var that = this;
+
+            var online = new saleProduct();
+            var sale2 = new sweetProduct();
+            var arraytest = [];
+            var loca = localStorage.getItem("localizzazione");
+
+            online.fetch({
+                success: function() {
+
+                    /*****************************************************
+                     * Aggiungo immagini e setto a float i prezzi in modo
+                     * adeguato
+                     *****************************************************/
+
+                    arraytest[0] = (online.attributes);
+
+                    test = online.attributes;
+
+                    sale2.fetch({
+                        success: function() {
+
+                            test = sale2.attributes;
+                            arraytest[1] = (sale2.attributes);
+                            arraytest[2] = loca;
+
+                            for (var i = 0; i < 5; i++) {
+
+                                var idprod = ((arraytest[0][i])).id;
+                                var idtemp = (arraytest[0][i]);
+                                idimg = (idtemp.associations.images[0]).id;
+                                idprod = idprod;
+                                var imgSrc = 'http://192.168.56.101/loveitaly/api/images/products/' + idprod + '/' + idimg + '/?ws_key=IYI6M35MLB8UVW38Y99RY3YPQWRX5X8H';
+
+
+                                ((arraytest[0][i])).img = imgSrc;
+                                ((arraytest[0][i])).price = parseFloat(((arraytest[0][i])).price).toFixed(2);
+                            }
+
+                            for (var i = 0; i < 5; i++) {
+
+                                var idprod = ((arraytest[1][i])).id;
+                                var idtemp = (arraytest[1][i]);
+                                idimg = (idtemp.associations.images[0]).id;
+                                idprod = idprod;
+                                var imgSrc = 'http://192.168.56.101/loveitaly/api/images/products/' + idprod + '/' + idimg + '/?ws_key=IYI6M35MLB8UVW38Y99RY3YPQWRX5X8H';
+
+
+                                ((arraytest[1][i])).img = imgSrc;
+                                ((arraytest[1][i])).price = parseFloat(((arraytest[1][i])).price).toFixed(2);
+                            }
+
+                            $(that.el).html(that.template(arraytest));
+
+                            that.startslider();
+                            that.startnav();
+
+                            return that;
+                        }
+                    });
+                }
+            });
+
         },
 
-        goToMap: function(e) {
-            Backbone.history.navigate("map", {
+        carrello: function(e) {
+            var arraytemp = [];
+            arraytemp = localStorage.getItem("Carrello");
+
+
+            /*****************************************************
+             * Prendo nome e prezzo dall'HTML
+             *****************************************************/
+            var namePrice = $(e.currentTarget).closest('#card-border').find('p').text();
+            namePrice = namePrice.replace(/\s+/g, '');
+            namePrice = namePrice.split("€");
+            /* -- -- */
+
+            var idprod = $(e.currentTarget).closest('#card-border').attr('data-prod');
+            name = namePrice[0],
+                img = $(e.currentTarget).closest('#card-border').attr('imgSrc');
+            price = namePrice[1];
+            quantity = 1;
+
+            var prod = new Products({
+                name: name,
+                id: idprod,
+                img: img,
+                price: parseFloat(price).toFixed(2),
+                quantity: quantity,
+                total: price * quantity
+            });
+
+            var Carrello = JSON.parse(localStorage["Carrello"]);
+            Carrello.push(prod);
+            localStorage["Carrello"] = JSON.stringify(Carrello);
+
+            if (Backbone.history.fragment === 'basket') {
+                Backbone.history.stop();
+                Backbone.history.start()
+            }
+
+            Backbone.history.navigate("basket", {
                 trigger: true
             });
+
         },
-        catView: function(event) {
-            Backbone.history.navigate("catView", {
-                trigger: true
-            });
-        },
+
         prodotto: function(e) {
-            Backbone.history.navigate("listaprodotti", {
+            e.preventDefault();
+
+            var datoprod = $(e.currentTarget).attr("data-prod");
+
+            localStorage.setItem("datoprod", datoprod);
+
+            Backbone.history.navigate("prodotto", {
                 trigger: true
+            });
+        },
+
+
+        /*****************************************************
+         * Questa funzione serve ad avviare gli elementi della
+         * navbar: Ricerca e Carrello e definiscono gli handler
+         * per gli eventi che li riguardano
+         *****************************************************/
+
+        startnav: function(e) {
+            $("#search-button").click(function(e) {
+                e.preventDefault();
+                $("#menu-button").hide();
+                $(this).hide();
+                $("#titolo-pagina").hide();
+                $("#search-input").css("display", "block");
+                $("#search").focus();
+            });
+
+            $("#search-input").focusout(function(e) {
+                e.preventDefault();
+                $("#search-input").hide();
+                $("#titolo-pagina").show();
+                $("#menu-button").show();
+                $("#search-button").show();
+                $("#search").val('');
+            });
+
+            $("#back-button").click(function(e) {
+                e.preventDefault();
+                $("#search-input").hide();
+                $("#menu-button").show();
+                $("#search-button").show();
+            });
+
+            $("#person-button").click(function(e) {
+                e.preventDefault();
+                $('#modal2').openModal();
+            });
+
+            $("#cart-button").click(function(e) {
+                e.preventDefault();
+                $('#modal1').openModal();
+            });
+
+            $("#svuota").click(function(e) {
+                e.preventDefault();
+                $('#modal1').closeModal();
+            });
+        },
+
+        /*****************************************************
+         * Questa funzione serve per avviare lo slider
+         *****************************************************/
+
+        startslider: function(e) {
+            $(".single-item").slick({
+                dots: true,
+                arrows: false,
+                adaptiveHeight: true
             });
         }
     });

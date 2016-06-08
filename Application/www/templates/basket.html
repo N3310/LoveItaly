@@ -1,0 +1,25 @@
+<div id="contenitore">
+  {{#each this}}
+  <li id="single-prod" class="collection-item avatar">
+    <img src="{{img}}" alt="" class="circle">
+    <div id="li-grid" class="row">
+      <div class="col s6 productTitle">
+        <span class="title">{{name}}</span>
+        <p>Quantity: <br>
+          {{quantity}}
+        </p>
+      </div>
+
+      <div id="liclose-icn" class="col s6">
+        <span><i  id="deletefromcart" prodName="{{name}}" class="material-icons">close</i></span>
+      </div>
+      <div class="col s12">
+        <span class="title right">€{{total}}</span>
+      </div>
+    </div>
+
+  </li>
+
+  {{/each}}
+  </div>
+  

@@ -1,13 +1,21 @@
+<div class="row">
+<div class="col s12">
+
 <ul class="collection">
   {{#each this}}
+  {{#if this.name}}
     <li class="collection-item avatar" id="prodotto" data-prod="{{this.id}}">
-      <img src="" alt="" class="circle">
+      {{#if img}}
+      <img src="{{img}}" alt="" class="circle">
+      {{else}}
+      <img src="img/no.jpg" alt="" class="circle">
+      {{/if}}
       <span class="title"><strong>{{this.name}}</strong></span>
-      <p>Chissà<br>
-
-      </p>
 
     </li>
-      {{/each}}
+    {{/if}}
+  {{/each}}
 
   </ul>
+</div>
+</div>

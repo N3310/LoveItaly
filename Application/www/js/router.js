@@ -1,18 +1,16 @@
 define(function(require) {
 
     var $ = require("jquery");
+    var slick = require("slider");
     var Backbone = require("backbone");
     var ListCategory = require("models/ListCategory");
     var Azienda = require("models/Azienda");
     var Categories = require("collections/Categories");
-    var Azienda_Collections = require("collections/Azienda_Collections");
+    var Carrello = require("collections/Carrello");
     var StructureView = require("views/StructureView");
     var MyView = require("views/pages/MyView");
     var catView = require("views/pages/catView");
-    var MapView = require("views/pages/MapView");
-  //  var prodottiView = require("views/pages/prodottiView");
     var productView = require("views/pages/productView");
-    var authView = require("views/pages/authView");
     var contactView = require("views/pages/contactView");
     var reservedView = require("views/pages/reservedView");
     var aziendeView = require("views/pages/aziendeView");
@@ -24,8 +22,17 @@ define(function(require) {
     var ListProductByCategoryView = require("views/pages/ListProductByCategoryView");
     var ListAz = require("models/ListAz");
     var Products = require("models/Products");
+    var SearchList = require("models/SearchList");
+    var Products_homepage = require("models/Products_homepage");
     var ListProductByManufacter = require("models/ListProductByManufacter");
     var ListProductByCategory = require("models/ListProductByCategory");
+    var basketView = require("views/pages/basketView");
+    var checkoutView = require("views/pages/checkoutView");
+    var ListSearchView = require("views/pages/ListSearchView");
+    var noconnessioneView = require("views/pages/noconnessioneView");
+    var successView = require("views/pages/successView");
+    var listalocalitaView = require("views/pages/listalocalitaView");
+
 
 
     var AppRouter = Backbone.Router.extend({
@@ -33,14 +40,12 @@ define(function(require) {
         constructorName: "AppRouter",
 
         routes: {
-            // the default is the structure view
+
             "": "showStructure",
             "myview": "myView",
             "map": "map",
             "categoria": "categoria",
             "listaprodotti": "listaprodotti",
-            "dettaglioprodotto": "dettaglioprodotto",
-            "auth": "auth",
             "contact": "contact",
             "reserved": "reserved",
             "aziende": "aziende",
@@ -49,53 +54,57 @@ define(function(require) {
             "register": "register",
             "dettaglio_azienda": "dettaglio_azienda",
             "listbymanu": "listbymanu",
-            "listaprod" : "listaprod",
-            "prodotto": "prodotto"
+            "listaprod": "listaprod",
+            "prodotto": "prodotto",
+            "basket": "basket",
+            "checkout": "checkout",
+            "listarisultatiricerca": "listarisultatiricerca",
+            "success": "success",
+            "listalocalita": "listalocalita"
         },
-
-
 
         firstView: "myview",
 
         initialize: function(options) {
 
-          /* Reperisco da JSON API lista CATEGORIE */
-          var listcat = new ListCategory();
+            var Carrello = new Array();
+            if (localStorage.getItem("Carrello") === null) {
+                localStorage["Carrello"] = JSON.stringify(Carrello);
+            }
+            /* Reperisco da JSON API lista CATEGORIE */
+            var listcat = new ListCategory();
 
-          listcat.fetch({
-              success: function(listcat, response, options) {
-                  /*
-                  Immagazino il modello della mia lista di categorie all'interno del localStorage
-                  in modo da non dover effettuare chiamate API di tale lista in futuro.
-                  */
-                  localStorage.setItem("cat", JSON.stringify(listcat));
+            listcat.fetch({
+                success: function(listcat, response, options) {
+                    /*
+                    Immagazino il modello della mia lista di categorie all'interno del localStorage
+                    in modo da non dover effettuare chiamate API di tale lista in futuro.
+                    */
+                    localStorage.setItem("cat", JSON.stringify(listcat));
 
-              },
-              error: function(listcat, response, options) {
-                  console.log('Errore chiamata ajax!');
-              }
-          });
+                },
+                error: function(listcat, response, options) {
+
+                }
+            });
 
 
             /* Reperisco da JSON API lista AZIENDE */
             var lista_azienda = new ListAz();
 
-                lista_azienda.fetch({
-                  success: function(lista_azienda, response, options) {
-                      /*
-                      Immagazino il modello della mia lista di categorie all'interno del localStorage
-                      in modo da non dover effettuare chiamate API di tale lista in futuro.
-                      */
-                      console.log(lista_azienda);
-                      localStorage.setItem("lista_azienda", JSON.stringify(lista_azienda));
+            lista_azienda.fetch({
+                success: function(lista_azienda, response, options) {
+                    /*
+                    Immagazino il modello della mia lista di categorie all'interno del localStorage
+                    in modo da non dover effettuare chiamate API di tale lista in futuro.
+                    */
+                    (lista_azienda);
+                    localStorage.setItem("lista_azienda", JSON.stringify(lista_azienda));
 
-                  },
-                  error: function(lista_azienda, response, options) {
-                      console.log('Errore chiamata ajax!');
-                  }
-                });
-
-
+                },
+                error: function(lista_azienda, response, options) {
+                }
+            });
 
             this.currentView = undefined;
         },
@@ -103,207 +112,177 @@ define(function(require) {
         myView: function() {
 
 
-            var model = new ListCategory();
-            // create the view
-            var page = new MyView({
-                model: model
-            });
-            // show the view
+            /*****************************************************
+             * Controllo stato connessione e scelgo la route da
+             * indirizzare
+             *****************************************************/
+
+            var connessione = localStorage.getItem('networkState');
+
+            if (connessione != 'none') {
+                var page = new MyView({});
+                this.changePage(page);
+                $(".single-item").slick({
+                    dots: true,
+                    arrows: false
+                });
+            } else {
+                var page = new noconnessioneView({});
+                this.changePage(page);
+            }
+        },
+
+        basket: function() {
+
+            $('#contenitore').remove();
+            var basket = new basketView({});
+
+            return $("#prod-list").append(basket.render());
+        },
+
+        success: function() {
+
+            var page = new successView({});
             this.changePage(page);
 
-            $(".single-item").slick({
-                dots: true,
-                arrows: false
+        },
+
+        checkout: function() {
+            var page = new checkoutView({
+
             });
+            this.changePage(page);
+
+        },
+
+        listalocalita: function() {
+            var page = new listalocalitaView({});
+            this.changePage(page);
 
         },
 
         dettaglio_azienda: function() {
-
-            var page = new aziendaView({
-
-            });
+            var page = new aziendaView({});
             this.changePage(page);
-
-
         },
 
         prodotto: function() {
 
-            var page = new productView({
-
-            });
+            var page = new productView({});
             this.changePage(page);
-
-             $('select').material_select();
-
 
         },
 
         listbymanu: function() {
-
-            var page = new ListProductByManufacterView({
-
-            });
+            var page = new ListProductByManufacterView({});
             this.changePage(page);
-
-
         },
 
         listaprod: function() {
-
-            var page = new ListProductByCategoryView({
-
-            });
+            var page = new ListProductByCategoryView({});
             this.changePage(page);
+        },
 
+        listarisultatiricerca: function() {
+
+            var page = new ListSearchView({});
+
+            this.changePage(page);
 
         },
 
         faq: function() {
 
-
             var model = new ListCategory();
-            // create the view
             var page = new faqView({
                 model: model
             });
-            // show the view
+
             this.changePage(page);
 
             $('.collapsible').collapsible({
-                accordion: false // A setting that changes the collapsible behavior to expandable instead of the default accordion style
+                accordion: false
             });
 
         },
         register: function() {
-
-
             var model = new ListCategory();
-            // create the view
             var page = new registerView({
                 model: model
             });
-            // show the view
             this.changePage(page);
-
-
-
         },
-
-
         contact: function() {
-
-
             var model = new ListCategory();
-            // create the view
             var page = new contactView({
                 model: model
             });
-            // show the view
             this.changePage(page);
-
         },
 
 
         login: function() {
-
-
             var model = new ListCategory();
-            // create the view
             var page = new loginView({
                 model: model
             });
-            // show the view
             this.changePage(page);
-
         },
 
         reserved: function() {
-
-
             var model = new ListCategory();
-            // create the view
             var page = new reservedView({
                 model: model
             });
-            // show the view
             this.changePage(page);
-
+            $('#modal2').closeModal();
         },
 
         categoria: function() {
-
-
-            var page = new catView({
-            });
-            // show the view
+            var page = new catView({});
             this.changePage(page);
         },
 
         listaprodotti: function() {
-            // highlight the nav1 tab bar element as the current one
-
-            // create a model with an arbitrary attribute for testing the template engine
             var model = new ListCategory({
                 key: "testValue"
             });
-            // create the view
             var page = new prodottiView({
                 model: model
             });
-            // show the view
             this.changePage(page);
         },
 
         aziende: function() {
-            // highlight the nav1 tab bar element as the current one
-
-            // create the view
-            var page = new aziendeView({  });
-            // show the view
+            var page = new aziendeView({});
             this.changePage(page);
         },
 
-        dettaglioprodotto: function() {
-            // highlight the nav1 tab bar element as the current one
-
-            // create a model with an arbitrary attribute for testing the template engine
+        prodotto: function() {
             var model = new ListCategory({
                 key: "testValue"
             });
-            // create the view
             var page = new productView({
                 model: model
             });
-            // show the view
             this.changePage(page);
         },
 
-        auth: function() {
-            // highlight the nav1 tab bar element as the current one
 
-            // create a model with an arbitrary attribute for testing the template engine
-            var model = new ListCategory({
-                key: "testValue"
-            });
-            // create the view
-            var page = new authView({
-                model: model
-            });
-            // show the view
-            this.changePage(page);
-        },
 
-        // load the structure view
         showStructure: function() {
             if (!this.structureView) {
                 this.structureView = new StructureView();
-                // put the el element of the structure view into the DOM
+
                 document.body.appendChild(this.structureView.render().el);
                 this.structureView.trigger("inTheDOM");
             }
-            // go to first view
+
+            var sessione = localStorage.getItem("sessione");
+            if (sessione != null) {
+                $(".right").append('<li><a id="person-button" ><i class="material-icons">person</i></a></li>');
+            }
+
             this.navigate(this.firstView, {
                 trigger: true
             });

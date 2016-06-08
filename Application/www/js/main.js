@@ -1,4 +1,3 @@
-// here we put the paths to all the libraries and framework we will use
 require.config({
     paths: {
         jquery: '../lib/jquery/jquery-2.2.4',
@@ -13,7 +12,9 @@ require.config({
         leaflet: '../lib/leaflet/leaflet',
         spin: '../lib/spin/spin.min',
         preloader: '../lib/preloader/pre-loader',
-        utils: '../lib/utils/utils'
+        utils: '../lib/utils/utils',
+        session: '../lib/backbone.session',
+        md5: '../lib/md5.min'
     },
     shim: {
         'jquery': {
@@ -46,9 +47,6 @@ require(['backbone', 'utils'], function(Backbone, Utils) {
 
         document.addEventListener("deviceready", run, false);
 
-
-
-        // requirejs(['materialize', 'jquery'], function(Materialize, $) {
         require(['materialize', 'jquery'], function(Materialize, $) {
             document.addEventListener("deviceready", initializeComponents, false);
 
@@ -57,47 +55,11 @@ require(['backbone', 'utils'], function(Backbone, Utils) {
                     ['velocity', 'jquery.easing', 'animation', 'hammerjs', 'jquery.hammer', 'global', 'collapsible', 'dropdown', 'leanModal', 'materialbox', 'parallax', 'tabs', 'tooltip', 'waves', 'toasts', 'sideNav', 'scrollspy', 'forms', 'slider', 'cards', 'pushpin', 'buttons', 'scrollFire', 'transitions', 'picker', 'picker.date', 'character_counter'],
                     function() {
                         $('.button-collapse').sideNav();
-                        $(".single-item").slick({
-                            dots: true,
-                            arrows: false
-                        });
                         $('.collapsible').collapsible({
-                            accordion: false // A setting that changes the collapsible behavior to expandable instead of the default accordion style
+                            accordion: false
                         });
                     });
             }
-
-
-
-            $("#search-button").click(function(e) {
-                e.preventDefault();
-                $("#menu-button").hide();
-                $(this).hide();
-                $("#titolo-pagina").hide();
-                $("#search-input").css("display", "block");
-                $("#search").focus();
-            });
-
-            $("#search-input").focusout(function(e) {
-                e.preventDefault();
-                $("#search-input").hide();
-                $("#titolo-pagina").show();
-                $("#menu-button").show();
-                $("#search-button").show();
-                $("#search").val('');
-            });
-
-            $("#back-button").click(function(e) {
-                e.preventDefault();
-                $("#search-input").hide();
-                $("#menu-button").show();
-                $("#search-button").show();
-            });
-
-            $("#cart-button").click(function(e) {
-                e.preventDefault();
-                $('#modal1').openModal();
-            });
 
         });
 

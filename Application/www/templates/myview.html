@@ -1,119 +1,69 @@
-
-
 <main class="row">
-            <!-- Slider Prodotti In Vetrina -->
-            <h5 style="text-align:center;">Prodotti In Vetrina</h5>
 
-            <section class="single-item">
-                <div class="card col s12">
-                    <div id="auth" class="card-image">
-                        <img src="http://placehold.it/350x150">
-                    </div>
-                    <div class="card-content col s6">
-                        <p>Zucchine<br>
-                            ( De Paulis Srl )
-                        </p>
-                    </div>
-                    <div class="card-action col s6 ">
-                        <a id="bottone-ca" class="waves-effect waves-light btn light-green darken-3"><i class="material-icons">add_shopping_cart</i></a>
-                    </div>
+    <!-- Slider Prodotti In Vetrina -->
+    <div id="arrow-header">
+        <h5 id="tit-vetr">Prodotti In Offerta</h5>
+        <img src="img/arrow.png">
+    </div>
+
+    <section class="single-item">
+        {{#each [0]}} {{#if name}}
+        <div class="card col s12">
+            <div id="dettagliofromhomepage" class="card-image">
+                {{#if img}}
+                <img id="imgslide" src="{{img}}" data-prod="{{id}}"> {{else}}
+                <img id="imgslide" src="img/no.jpg" data-prod="{{id}}"> {{/if}}
+            </div>
+            <div id="card-border" class="col s12" data-prod="{{id}}" imgSrc="{{img}}">
+                <div class="card-content col s6">
+                    <p class="productTitle">{{name}}
+                        <br> €{{price}}
+                    </p>
                 </div>
-                <div class="card col s12">
-                    <div id="auth" class="card-image">
-                        <img src="http://placehold.it/350x150">
-                    </div>
-                    <div class="card-content col s6">
-                        <p>Zucchine<br>
-                            De Paulis Srl
-                        </p>
-                    </div>
-                    <div class="card-action col s6 ">
-                        <a id="bottone-ca" class="waves-effect waves-light btn  light-green darken-3"><i class="material-icons">add_shopping_cart</i></a>
-                    </div>
+                <div class="card-action col s6 ">
+                    <a id="bottone-ca" class="waves-effect waves-light btn light-green darken-3"><i class="material-icons">add_shopping_cart</i></a>
                 </div>
-                <div class="card col s12">
-                    <div class="card-image">
-                        <img src="http://placehold.it/350x150">
-                    </div>
-                    <div class="card-content col s6">
-                        <p>Zucchine<br>
-                            De Paulis Srl
-                        </p>
-                    </div>
-                    <div class="card-action col s6 ">
-                        <a id="bottone-ca" class="waves-effect waves-light btn  light-green darken-3"><i class="material-icons">add_shopping_cart</i></a>
-                    </div>
+            </div>
+        </div>
+        {{/if}} {{/each}}
+    </section>
+
+    <div id="slider2"></div>
+    <!-- -->
+
+    <!-- Slider Nuovi Prodotti-->
+    <div id="arrow-header">
+        <h5 id="tit-vetr">Dolci di LoveItaly</h5>
+        <img src="img/arrow.png">
+    </div>
+
+    <section class="single-item">
+        {{#each [1]}} {{#if name}}
+        <div class="card col s12">
+
+            <div id="dettagliofromhomepage" class="card-image">
+                {{#if img}}
+                <img id="imgslide" src="{{img}}" data-prod="{{id}}"> {{else}}
+                <img id="imgslide" src="img/no.jpg" data-prod="{{id}}"> {{/if}}
+            </div>
+            <div id="card-border" class="col s12" data-prod="{{id}}" imgSrc="{{img}}">
+                <div class="card-content col s6">
+                    <p class="productTitle">{{name}}
+                        <br> €{{price}}
+                    </p>
                 </div>
-                <div class="card col s12">
-                    <div class="card-image">
-                        <img src="http://placehold.it/350x150">
-                    </div>
-                    <div class="card-content col s6">
-                        <p>Zucchine<br>
-                            De Paulis Srl
-                        </p>
-                    </div>
-                    <div class="card-action col s6 ">
-                        <a id="bottone-ca" class="waves-effect waves-light btn  light-green darken-3"><i class="material-icons">add_shopping_cart</i></a>
-                    </div>
+                <div class="card-action col s6 ">
+                    <a id="bottone-ca" class="waves-effect waves-light btn light-green darken-3"><i class="material-icons">add_shopping_cart</i></a>
                 </div>
-            </section>
-            <!-- -->
-            <!-- Slider Nuovi Prodotti-->
-            <h5 style="text-align:center;">Nuovi Prodotti</h5>
-            <section class="single-item">
-                <div class="card col s12">
-                    <div class="card-image">
-                        <img src="http://placehold.it/350x150">
-                    </div>
-                    <div class="card-content col s6">
-                        <p>Zucchine<br>
-                            ( De Paulis Srl )
-                        </p>
-                    </div>
-                    <div class="card-action col s6 ">
-                        <a id="bottone-ca" class="waves-effect waves-light btn light-green darken-3"><i class="material-icons">add_shopping_cart</i></a>
-                    </div>
-                </div>
-                <div class="card col s12">
-                    <div class="card-image">
-                        <img src="http://placehold.it/350x150">
-                    </div>
-                    <div class="card-content col s6">
-                        <p>Zucchine<br>
-                            De Paulis Srl
-                        </p>
-                    </div>
-                    <div class="card-action col s6 ">
-                        <a id="bottone-ca" class="waves-effect waves-light btn  light-green darken-3"><i class="material-icons">add_shopping_cart</i></a>
-                    </div>
-                </div>
-                <div class="card col s12">
-                    <div class="card-image">
-                        <img src="http://placehold.it/350x150">
-                    </div>
-                    <div class="card-content col s6">
-                        <p>Zucchine<br>
-                            De Paulis Srl
-                        </p>
-                    </div>
-                    <div class="card-action col s6 ">
-                        <a id="bottone-ca" class="waves-effect waves-light btn  light-green darken-3"><i class="material-icons">add_shopping_cart</i></a>
-                    </div>
-                </div>
-                <div class="card col s12">
-                    <div class="card-image">
-                        <img src="http://placehold.it/350x150">
-                    </div>
-                    <div class="card-content col s6">
-                        <p>Zucchine<br>
-                            De Paulis Srl
-                        </p>
-                    </div>
-                    <div class="card-action col s6 ">
-                        <a id="bottone-ca" class="waves-effect waves-light btn  light-green darken-3"><i class="material-icons">add_shopping_cart</i></a>
-                    </div>
-                </div>
-            </section>
-            <!-- -->
-        </main>
+            </div>
+        </div>
+        {{/if}} {{/each}}
+    </section>
+    <!-- -->
+
+    <!-- Blocco della geolocalizzazione-->
+    <div id="geolocalizzazione" class="col s12">
+        <p><i class="material-icons">room</i> Benvenuto!! sei localizzato a {{[2]}}</p>
+    </div>
+    <!-- -->
+</main>

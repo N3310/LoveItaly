@@ -1,86 +1,61 @@
 <div class="row center">
- <img src="img/registrazione.png" style="max-width: 30em;"></a>
- </div>
- <div class="row">
-    <div class="col s12">
-        <!-- contenuto pagina registrazione -->
 
-        <div class="input-field col s12">
-        <p>
-            <input name="group1" type="radio" id="test1" />
-            <label for="test1">Sig</label>
+  <div class="col s12">
+    <img src="img/registrazione.png" id="img-reg"></a>
 
+    <form action="/register" id="register-form">
 
-            <input name="group1" type="radio" id="test2" />
-            <label for="test2">Sig.ra</label>
-        </p>
-</div>
+      <div id="register-div" class="col s12 card ">
 
-        <div class="input-field col s12">
-            <input id="email" type="email" class="validate">
-            <label for="email">Email</label>
-        </div>
-        <div class="input-field col s12">
-            <input id="password" type="password" class="validate">
-            <label for="password">Password</label>
-        </div>
-        <div class="input-field col s12">
-            <input id="nome" type="text" class="validate">
-            <label for="nome">Nome</label>
-        </div>
-        <div class="input-field col s12">
-            <input id="cognome" type="text" class="validate">
-            <label for="cognome">Cognome</label>
-        </div>
-        <div class="input-field col s12">
-            <input id="indirizzo" type="text" class="validate">
-            <label for="indirizzo">Indirizzo</label>
-        </div>
-        <div class="input-field col s12">
-            <input id="cap" type="number" class="validate">
-            <label for="cap">Codice Postale</label>
-        </div>
-        <div class="input-field col s12">
-            <input id="citta" type="text" class="validate">
-            <label for="citta">Città</label>
-        </div>
-        <div class="input-field col s12">
-            <input id="provincia" type="text" class="validate">
-            <label for="provincia">Provincia</label>
-        </div>
-        <div class="input-field col s12">
-            <input id="nazione" type="text" class="validate">
-            <label for="nazione">Nazione</label>
-        </div>
-        <div class="input-field col s12">
-            <input id="cellulare" type="number" class="validate">
-            <label for="cellulare">Cellulare</label>
-        </div>
-        <div class="input-field col s12">
-            <input id="titolo" type="text" class="validate">
-            <label for="titolo">Titolo per futuro</label>
+        <div class="input-field">
+
+          <div class="col s2">
+            <i class="material-icons">mail</i>
+          </div>
+          <div class="col s10">
+            <input id="email" type="text" placeholder="Email" class="validate">
+          </div>
         </div>
 
-        <div class="input-field col s12">
-        <p>
-      <input type="checkbox" class="filled-in" id="filled-in-box" checked="none" />
-      <label for="filled-in-box">Accetto trattamento dati personali</label>
-    </p>
+        <div class="input-field">
+
+          <div class="col s2">
+            <i class="material-icons">lock</i>
+          </div>
+          <div class="col s10">
+            <input id="password" type="password" placeholder="Password" class="validate">
+          </div>
+        </div>
+
+        <div class="input-field">
+
+          <div class="col s2">
+          <i class="material-icons">person_pin</i>
+          </div>
+          <div class="col s10">
+            <input id="nome" type="text" placeholder="Nome" class="validate">
+          </div>
+        </div>
+
+        <div class="input-field">
+
+          <div class="col s2">
+          <i class="material-icons">supervisor_account</i>
+          </div>
+          <div class="col s10">
+            <input id="cognome" type="text"  placeholder="Cognome" class="validate">
+          </div>
+        </div>
+
+
+      </div>
+
+
+
+      <div class="col s12">
+        <a id="registrati" class="waves-effect waves-light btn" >Registrati</a>
+      </div>
+
+    </form>
   </div>
-  <div class="input-field col s12">
-    <p>
-          <input type="checkbox" class="filled-in" id="filled-in-box" checked="none" />
-          <label for="filled-in-box">Accetto art. 1341-1342</label>
-        </p>
-    </div>
-
-
-
-
-
-
-    </div>
-</div>
-<div class="row center">
-<a class="waves-effect waves-light btn" style="margin-top:2em;">Registrati</a>
-</div>
+</div>    

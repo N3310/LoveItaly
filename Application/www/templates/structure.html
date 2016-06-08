@@ -1,16 +1,19 @@
 
-  <header>
-<nav id="greenNav">
-<div class="nav-wrapper container">
-  <a data-activates="slide-out" id="menu-button" class="button-collapse"><i class="mdi-navigation-menu material-icons">menu</i></a>
+<header>
+    <nav id="greenNav">
+      <div class="nav-wrapper container">
+        <a data-activates="slide-out" id="menu-button" class="button-collapse"><i class="mdi-navigation-menu material-icons">menu</i></a>
 
-  <ul class="right">
-    <li><a id="search-button" ><i class="material-icons">search</i></a></li>
-    <li><a id="cart-button" ><i class="material-icons">shopping_cart</i></a></li>
-  </ul>
+        <ul class="right">
+          <li><a id="search-button" ><i class="material-icons">search</i></a></li>
+          <li>
+            <a href="#modal1" id="cart-button"><i class="material-icons">shopping_cart</i></a>
+          </li>
+        </ul>
+
         <!-- Codice della sideNav -->
         <ul id="slide-out" class="side-nav">
-            <l1><img id="loveitaly-logo" src="img/logo-loveitaly-enz.png" alt="logo"></li>
+          <l1><img id="loveitaly-logo" src="img/logo-loveitaly-enz.png" alt="logo"></li>
             <div class="lightGreenEl">
               <li><a id="nav1">Home </a></li>
               <li><a id="catView">Categorie</a></li>
@@ -18,39 +21,82 @@
               <li><a id="contact">Contatti</a></li>
               <li><a id="login">Login/Registrazione</a></li>
               <li><a id="faq">FAQ</a></li>
-              <li><a id="reserved">Area Riservata</a></li>
             </div>
-        </ul>
-        <!-- -->
-        <!-- Codice della ricerca -->
-        <form id="search-input">
+          </ul>
+          <!-- -->
+          <!-- Codice della ricerca -->
+          <form id="search-input" onsubmit="return false">
             <div class="input-field">
-              <input id="search" type="search" required>
+              <input id="search" type="search">
               <i id="back-button"class="material-icons">arrow_back</i>
             </div>
-        </form>
-        <!-- -->
-        <!-- Modal Cart Structure -->
-        <div id="modal1" class="modal bottom-sheet">
+          </form>
+          <!-- -->
+          <!-- Modal Cart Structure -->
+          <div id="modal1" class="modal bottom-sheet">
             <div class="modal-content">
-              <h4>Modal Header</h4>
-              <p>A bunch of text</p>
-            </div>
-            <div class="modal-footer">
-              <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
-            </div>
-        </div>
-    </div>
-</nav>
+              <a id="close-icn" class=" modal-action modal-close waves-effect waves-green btn-flat col s6"><i class="material-icons">close</i></a>
+              <div id="modal-header" class="col s12">
 
+                <div id="arrow-header" >
+                  <h5 id="tit-vetr" class="col s6">Carrello</h5>
+                  <img src="img/arrow.png">
+                </div>
+              </div>
 
+              <!-- Qui ci va la lista dei prodotti aggiunti al carrello a run time-->
+              <ul id="prod-list" class="collection">
+                {{#each this}}
+                <li id="single-prod" class="collection-item avatar">
+                  <img src="{{img}}" alt="" class="circle">
+                  <div id="li-grid" class="row">
+                    <div class="col s6">
+                      <span class="title">{{name}}</span>
+                      <p>Quantity: <br>
+                    {{quantity}}
+                      </p>
+                    </div>
+                    <div id="liclose-icn" class="col s6">
+                      <span><i  id="deletefromcart" indexcart="{{@index}}" class="material-icons">close</i></span>
+                    </div>
+                    <div class="col s12">
+                      <span class="title right">€{{total}}</span>
+                    </div>
+                  </div>
+
+                </li>
+                {{/each}}
+              </ul>
+            </div>
+
+            <div class="modal-footer row">
+                <div class="col s6">
+                  <a id="svuota" class="waves-effect waves-light btn">Svuota</a>
+                </div>
+                <div  class="col s6">
+                  <a id="cartleft-btn" class="waves-effect waves-light btn">Checkout</a>
+                </div>
+              </div>
+            </div>
+            <!-- -->
+            <!-- Modal per l'omino bianco -->
+            <div id="modal2" class="modal bottom-sheet">
+
+              <div id="modal2-content" class="modal-content row">
+                <div id="area-per" class="col s12">
+                  <a id="reserved">Area Personale </a>
+                </div>
+                <div class="col s12">
+                  <a id="logout">Logout</a>
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+      </nav>
+      <div id="navbar-inverse"></div>
 </header>
 
-<!-- <nav id="navigation">
-    <div id="nav1" class="i-4">nav 1</div>
-    <div id="nav2" class="i-8">nav 2</div>
-</nav> -->
 <div id="content" class="content">
-
-
 </div>
