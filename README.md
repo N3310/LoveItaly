@@ -14,6 +14,9 @@ LoveItaly/<br>
   |--Documentation/<br>
   |  |--LoveItaly_DesignDOC.pdf     //Design Document<br>
   |   |--LoveItaly_TechDOC.pdf     //Technical Document<br>
+   |--Video/<br>
+  |  |--LoveItaly-Sample Basket.mp4     //Video di 30sec indicante la funzionalità principale<br>
+  |   |--LoveItaly-Trailer.mp4     //Trailer video indicante tutte le funzionalità dell'applicazione <br>
 
 
 ## Tecnologie Utilizzate
